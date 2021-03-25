@@ -16,7 +16,8 @@ login_manager.init_app(app)
 def main():
     db_session.global_init("db/mars_explorer.sqlite")
     app.register_blueprint(jobs_api_v1.blueprint)
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 @login_manager.user_loader
 def load_user(user_id):
